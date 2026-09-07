@@ -1,0 +1,10 @@
+{
+  "name":"SAHAY — Everything You Need. One Place.",
+  "short_name":"SAHAY",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#0A0B0E",
+  "theme_color":"#0A0B0E",
+  "description":"SAHAY — a single place for education, career, documents, money, safety and everyday guidance.",
+  "icons":[]
+}
