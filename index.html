@@ -148,36 +148,22 @@ html.high-contrast .noise{display:none;}
 /* ======================================================
    LOADER
    ====================================================== */
-/* SAHAY / first light — self-contained opening sequence */
-#loader{--intro-x:50%;--intro-y:42%;position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;isolation:isolate;overflow:hidden;background:#080b0f;color:#e5e9ee;font-family:Arial,Helvetica,sans-serif;perspective:1200px;animation:introFailsafe .01s 7s forwards}
-#loader::before{content:'';position:absolute;inset:-25%;z-index:-2;background:radial-gradient(ellipse at var(--intro-x) var(--intro-y),#64829733 0%,#23374122 24%,transparent 52%),linear-gradient(115deg,transparent 32%,#d7e8ed08 49%,transparent 62%);transform:rotate(-9deg);animation:introLight 3.8s ease-out both;pointer-events:none}
-#loader::after{content:'';position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at center,transparent 28%,#030508aa 100%);box-shadow:inset 0 0 140px #0009}
-#loader .intro-top,#loader .intro-bottom{position:absolute;left:6vw;right:6vw;display:flex;align-items:center;justify-content:space-between;gap:20px;z-index:6;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#96a4b3;line-height:1.6}
-#loader .intro-top{top:max(30px,env(safe-area-inset-top));border-top:1px solid #b6c4d026;padding-top:18px}
-#loader .intro-edition{font-family:Georgia,serif;font-style:italic;letter-spacing:.02em;text-transform:none;font-size:16px;color:#c6ccd5}
-#loader .intro-skip{appearance:none;border:1px solid #c5d5e033;background:#ffffff04;color:#dce3eb;border-radius:40px;padding:10px 17px;font-size:12px;letter-spacing:.08em;cursor:pointer;transition:background .2s,border-color .2s}
-#loader .intro-skip:hover{background:#ffffff12;border-color:#c5d5e077}#loader .intro-skip:focus-visible{outline:2px solid #fff;outline-offset:5px}
-#loader .intro-scene{width:100%;text-align:center;position:relative;padding:40px 3vw;transform-style:preserve-3d}
-#loader .intro-overline{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:#a9b8c7;margin:0 0 32px;animation:introCaption .9s .15s both}
-#loader .intro-word{position:relative;display:flex;justify-content:center;gap:.014em;margin:0;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(74px,19vw,270px);line-height:1.1;letter-spacing:-.065em;padding-right:.065em;filter:drop-shadow(0 20px 13px #000b);user-select:none}
-#loader .intro-word span{display:inline-block;color:#c5cbd0;background:linear-gradient(167deg,#f0f4f8 0%,#9facb7 22%,#dce5eb 33%,#697683 47%,#e5edf2 50%,#a2b3c1 54%,#4a5662 70%,#c4cdd5 88%,#74828d 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:.6px #d8e3ee42;animation:introLetter 1.7s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*.105s + .15s);transform-origin:50% 90%}
-#loader .intro-glint{position:absolute;top:57%;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,#e5f6ff80,transparent);box-shadow:0 0 35px 3px #bfd6f12b;opacity:0;animation:introGlint 2.6s .4s both;pointer-events:none}
-#loader .intro-tagline{font-family:Georgia,'Times New Roman',serif;font-size:clamp(20px,2.4vw,32px);font-weight:400;font-style:italic;line-height:1.5;color:#bdc8d2;letter-spacing:-.025em;margin:25px 15px 0;animation:introCaption 1.2s 1.05s both}
-#loader .intro-bottom{bottom:max(32px,env(safe-area-inset-bottom));align-items:end;text-transform:none;letter-spacing:.02em}
-#loader .intro-note{max-width:260px;margin:0;font-size:13px;color:#8b9aab;line-height:1.6}
-#loader .intro-track{width:clamp(130px,20vw,280px);height:1px;background:#9caec82e;margin-top:14px;overflow:hidden}
-#loader .intro-track span{display:block;width:100%;height:100%;background:linear-gradient(90deg,#63798e,#e8eef5);transform-origin:left;animation:introTrack 3.5s cubic-bezier(.2,.6,.4,1) both}
-#loader .intro-entering{color:#c2ccd6;font-size:12px;letter-spacing:.1em;text-align:right}
-#loader.hide{animation:none;opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.035);filter:blur(5px);transition:opacity .75s ease,transform .95s cubic-bezier(.22,1,.36,1),filter .75s ease,visibility .8s}
-@keyframes introLetter{from{opacity:0;transform:translateY(36px) rotateX(28deg);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
-@keyframes introCaption{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@keyframes introLight{from{opacity:0;transform:translateX(-12%) rotate(-9deg)}to{opacity:1;transform:translateX(0) rotate(-9deg)}}
-@keyframes introGlint{0%{opacity:0;transform:scaleX(.2) translateY(24px)}45%{opacity:.8}100%{opacity:0;transform:scaleX(1) translateY(-48px)}}
-@keyframes introTrack{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes introFailsafe{to{visibility:hidden;pointer-events:none;opacity:0}}
-@media(max-width:600px){#loader .intro-top,#loader .intro-bottom{left:7vw;right:7vw}#loader .intro-overline{font-size:10px;letter-spacing:.3em;margin-bottom:28px}#loader .intro-note{max-width:155px;font-size:12px}#loader .intro-edition{font-size:14px}#loader .intro-tagline{margin-top:22px}#loader .intro-bottom{gap:25px}#loader .intro-word{font-size:20vw}#loader .intro-entering{font-size:10px}}
-@media(prefers-reduced-motion:reduce){#loader *,#loader::before{animation:none!important}#loader .intro-glint{display:none}#loader.hide{transform:none;filter:none;transition:opacity .15s,visibility .15s}#loader .intro-track span{transform:none}}
-html.reduce-motion #loader *,html.reduce-motion #loader::before{animation:none!important}
+/* SAHAY — continuation of the homepage theme */
+#loader{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;overflow:hidden;isolation:isolate;background:var(--ink,#0A0B0E);color:var(--paper,#EDEDE5);animation:introFailsafe .01s 5s forwards}
+#loader::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 50% 52%,rgba(174,192,255,.055),transparent 45%),radial-gradient(ellipse at 72% 80%,rgba(76,111,255,.035),transparent 40%);animation:introAmbient 2.5s ease-in-out both}
+#loader .intro-word{margin:0;padding:24px;display:block;text-align:center;font-family:var(--font-display,'Sora',system-ui,sans-serif);font-size:clamp(54px,11vw,152px);font-weight:700;line-height:1.2;letter-spacing:-.035em;color:var(--paper,#EDEDE5);text-shadow:0 1px 0 rgba(255,255,255,.08);animation:introWord 1.2s var(--ease,cubic-bezier(.22,1,.36,1)) both}
+#loader .intro-word span{display:inline-block;background:linear-gradient(110deg,var(--paper,#EDEDE5) 20%,var(--paper,#EDEDE5) 40%,#c6d3ff 48%,#fff 50%,var(--paper,#EDEDE5) 58%,var(--paper,#EDEDE5) 80%);background-size:300% 100%;background-position:100% 0;background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:introLetter .85s var(--ease) both,introSheen 1.1s ease-in-out both;animation-delay:calc(var(--letter)*.11s),1.05s}
+@keyframes introLetter{from{opacity:0;transform:translateY(16px);filter:blur(3px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes introSheen{from{background-position:100% 0}to{background-position:0% 0}}
+@keyframes introAmbient{0%{opacity:.25;transform:scale(.95)}65%{opacity:1}100%{opacity:.65;transform:scale(1.06)}}
+#loader.hide{animation:none;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .5s ease,visibility .5s}
+@keyframes introWord{from{opacity:0;letter-spacing:.015em;transform:translateY(5px)}to{opacity:1;letter-spacing:-.035em;transform:none}}
+@keyframes introFailsafe{to{opacity:0;visibility:hidden;pointer-events:none}}
+@media(prefers-reduced-motion:reduce){#loader .intro-word,#loader .intro-word span,#loader::before{animation:none!important}#loader.hide{transition:none}}
+html.reduce-motion #loader .intro-word,#loader .intro-word span,#loader::before{animation:none!important}
+@media(forced-colors:active){#loader .intro-word span{background:none;color:CanvasText;-webkit-text-fill-color:CanvasText}}
+
+#intro-particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}#loader .intro-word{position:relative;z-index:1}@media(prefers-reduced-motion:reduce){#intro-particles{display:none}}html.reduce-motion #intro-particles{display:none}
 </style><noscript><style>#loader{display:none!important}</style></noscript><style>
 
 
@@ -932,11 +918,7 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ini
 <div class="noise" aria-hidden="true"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<div id="loader" role="dialog" aria-modal="true" aria-label="Welcome to SAHAY">
-  <div class="intro-top"><span class="intro-edition">A little clarity. A new beginning.</span><button class="intro-skip" id="intro-skip" type="button">Skip intro ↗</button></div>
-  <div class="intro-scene"><p class="intro-overline">Your next chapter begins here</p><div class="intro-word" aria-label="SAHAY"><span style="--i:0" aria-hidden="true">S</span><span style="--i:1" aria-hidden="true">A</span><span style="--i:2" aria-hidden="true">H</span><span style="--i:3" aria-hidden="true">A</span><span style="--i:4" aria-hidden="true">Y</span></div><div class="intro-glint" aria-hidden="true"></div><p class="intro-tagline">Possibility, brought closer.</p></div>
-  <div class="intro-bottom"><p class="intro-note">From India.<br>For the journeys ahead.</p><div><div class="intro-entering" role="status">Opening your world</div><div class="intro-track" aria-hidden="true"><span></span></div></div></div>
-</div>
+<div id="loader" role="status" aria-label="SAHAY"><canvas id="intro-particles" aria-hidden="true"></canvas><div class="intro-word" aria-hidden="true"><span style="--letter:0">S</span><span style="--letter:1">A</span><span style="--letter:2">H</span><span style="--letter:3">A</span><span style="--letter:4">Y</span></div></div>
 
 <!-- NAV -->
 <header class="nav" id="siteNav">
@@ -5440,17 +5422,38 @@ if('IntersectionObserver'in window)new IntersectionObserver(entries=>{visible=en
 </script><script>(function(){
 'use strict';
 var loader=document.getElementById('loader');if(!loader)return;
-var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-var started=performance.now(),closed=false,timer,focusWas=document.activeElement;
-function finish(){if(closed)return;closed=true;clearTimeout(timer);loader.classList.add('hide');loader.setAttribute('aria-hidden','true');loader.inert=true;document.removeEventListener('keydown',onKey);loader.removeEventListener('pointermove',light);window.sahayIntroComplete=true;window.dispatchEvent(new Event('sahay:intro-complete'));if(loader.contains(document.activeElement)){var target=document.getElementById('hero')||document.getElementById('main');if(target){if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true})}else if(focusWas&&focusWas.focus)focusWas.focus()}setTimeout(function(){loader.remove()},900)}
-function onKey(e){if(e.key==='Escape'){e.preventDefault();finish()}}
-function light(e){if(reduced)return;loader.style.setProperty('--intro-x',(35+e.clientX/Math.max(1,innerWidth)*30)+'%');loader.style.setProperty('--intro-y',(25+e.clientY/Math.max(1,innerHeight)*25)+'%')}
-document.getElementById('intro-skip').onclick=finish;document.addEventListener('keydown',onKey);loader.addEventListener('pointermove',light,{passive:true});
-// Presentation duration, not a simulated network loading percentage.
-var duration=reduced?250:3600;timer=setTimeout(finish,Math.max(0,duration-(performance.now()-started)));
-// Tab immediately enters the accessible skip control instead of the covered page.
-loader.addEventListener('keydown',function(e){if(e.key==='Tab'){e.preventDefault();document.getElementById('intro-skip').focus()}});
-document.getElementById('intro-skip').focus({preventScroll:true});
+var reduced=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)||document.documentElement.classList.contains('reduce-motion');
+var closed=false,timer;
+function finish(){if(closed)return;closed=true;clearTimeout(timer);loader.classList.add('hide');loader.setAttribute('aria-hidden','true');document.removeEventListener('keydown',onKey);window.sahayIntroComplete=true;window.dispatchEvent(new Event('sahay:intro-complete'));setTimeout(function(){loader.remove()},550)}
+function onKey(e){if(e.key==='Escape'||e.key==='Tab')finish()}
+document.addEventListener('keydown',onKey);
+timer=setTimeout(finish,reduced?120:3200);
+})();
+</script><script>/* Lightweight browser particle effect inspired by Niagara-style flow. */
+(function(){
+'use strict';
+var root=document.getElementById('loader'),canvas=document.getElementById('intro-particles');
+if(!root||!canvas)return;
+var motion=window.matchMedia?matchMedia('(prefers-reduced-motion: reduce)'):null;
+if((motion&&motion.matches)||document.documentElement.classList.contains('reduce-motion'))return;
+var ctx=canvas.getContext('2d');if(!ctx)return;
+var width=0,height=0,rx=0,ry=0,cx=0,cy=0,frame=0,stopped=false,last=0,start=performance.now();
+var particles=[],count=innerWidth<600?76:124;
+for(var i=0;i<count;i++)particles.push({phase:Math.random()*Math.PI*2,speed:.5+Math.random()*.7,lane:Math.random(),size:.55+Math.random()*1.05,offset:Math.random()*6.28,trail:[]});
+var sprite=document.createElement('canvas');sprite.width=sprite.height=48;var sc=sprite.getContext('2d'),glow=sc.createRadialGradient(24,24,0,24,24,24);glow.addColorStop(0,'rgba(221,230,255,.8)');glow.addColorStop(.2,'rgba(174,192,255,.35)');glow.addColorStop(1,'rgba(76,111,255,0)');sc.fillStyle=glow;sc.fillRect(0,0,48,48);
+function resize(){width=innerWidth;height=innerHeight;var dpr=Math.min(devicePixelRatio||1,1.5);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);var word=root.querySelector('.intro-word').getBoundingClientRect();cx=word.left+word.width/2;cy=word.top+word.height/2;rx=Math.min(width*.45,Math.max(145,word.width*.54));ry=Math.min(height*.25,Math.max(60,word.height*.65));particles.forEach(function(p){p.trail=[]})}
+function render(now){if(stopped)return;frame=requestAnimationFrame(render);if(document.hidden||now-last<32)return;last=now;var t=(now-start)/1000,appear=Math.min(1,t/.5),depart=Math.min(1,Math.max(0,(3.2-t)/.55));ctx.clearRect(0,0,width,height);ctx.globalCompositeOperation='lighter';
+particles.forEach(function(p,i){var a=p.phase+t*p.speed,dist=.86+p.lane*.26,x=cx+Math.cos(a)*rx*dist,y=cy+Math.sin(a)*ry*dist+Math.sin(a*3+t+p.offset)*11;
+// Two broad streams drift around the lettering, keeping its centre readable.
+x+=Math.sin(a*2+t*.4)*10;y+=Math.cos(a*2+p.offset)*7;
+p.trail.push([x,y]);if(p.trail.length>7)p.trail.shift();var alpha=(.28+p.lane*.5)*appear*depart;
+ctx.strokeStyle='rgba(174,192,255,'+(alpha*.28)+')';ctx.lineWidth=p.size*.65;ctx.beginPath();p.trail.forEach(function(v,j){if(j)ctx.lineTo(v[0],v[1]);else ctx.moveTo(v[0],v[1])});ctx.stroke();
+ctx.globalAlpha=alpha*.4;var size=p.size*12;ctx.drawImage(sprite,x-size/2,y-size/2,size,size);ctx.globalAlpha=1;
+ctx.fillStyle='rgba(220,228,250,'+alpha+')';ctx.beginPath();ctx.arc(x,y,p.size,0,Math.PI*2);ctx.fill();
+});ctx.globalCompositeOperation='source-over';}
+function stop(){if(stopped)return;stopped=true;cancelAnimationFrame(frame);ctx.clearRect(0,0,width,height);window.removeEventListener('resize',resize);window.removeEventListener('sahay:intro-complete',stop);if(motion&&motion.removeEventListener)motion.removeEventListener('change',onMotion)}
+function onMotion(e){if(e.matches)stop()}
+resize();window.addEventListener('resize',resize,{passive:true});window.addEventListener('sahay:intro-complete',stop,{once:true});if(motion&&motion.addEventListener)motion.addEventListener('change',onMotion);frame=requestAnimationFrame(render);setTimeout(stop,4800);
 })();
 </script></body>
 </html>
