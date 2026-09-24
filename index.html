@@ -148,15 +148,38 @@ html.high-contrast .noise{display:none;}
 /* ======================================================
    LOADER
    ====================================================== */
-#loader{
-  position:fixed; inset:0; background:var(--ink); z-index:999;
-  display:flex; align-items:center; justify-content:center; flex-direction:column; gap:18px;
-}
-#loader .mark{font-family:var(--font-display); font-weight:800; font-size:1.4rem; letter-spacing:0.01em; opacity:0.92;}
-#loader .bar{width:180px; height:1px; background:var(--line-strong); position:relative; overflow:hidden;}
-#loader .bar::after{content:''; position:absolute; left:-40%; top:0; width:40%; height:100%; background:var(--signal); animation:loadsweep 1.1s ease-in-out infinite;}
-@keyframes loadsweep{0%{left:-40%;}100%{left:100%;}}
-#loader.hide{opacity:0; visibility:hidden; transition:opacity .6s var(--ease), visibility .6s;}
+/* SAHAY / first light — self-contained opening sequence */
+#loader{--intro-x:50%;--intro-y:42%;position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;isolation:isolate;overflow:hidden;background:#080b0f;color:#e5e9ee;font-family:Arial,Helvetica,sans-serif;perspective:1200px;animation:introFailsafe .01s 7s forwards}
+#loader::before{content:'';position:absolute;inset:-25%;z-index:-2;background:radial-gradient(ellipse at var(--intro-x) var(--intro-y),#64829733 0%,#23374122 24%,transparent 52%),linear-gradient(115deg,transparent 32%,#d7e8ed08 49%,transparent 62%);transform:rotate(-9deg);animation:introLight 3.8s ease-out both;pointer-events:none}
+#loader::after{content:'';position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(ellipse at center,transparent 28%,#030508aa 100%);box-shadow:inset 0 0 140px #0009}
+#loader .intro-top,#loader .intro-bottom{position:absolute;left:6vw;right:6vw;display:flex;align-items:center;justify-content:space-between;gap:20px;z-index:6;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#96a4b3;line-height:1.6}
+#loader .intro-top{top:max(30px,env(safe-area-inset-top));border-top:1px solid #b6c4d026;padding-top:18px}
+#loader .intro-edition{font-family:Georgia,serif;font-style:italic;letter-spacing:.02em;text-transform:none;font-size:16px;color:#c6ccd5}
+#loader .intro-skip{appearance:none;border:1px solid #c5d5e033;background:#ffffff04;color:#dce3eb;border-radius:40px;padding:10px 17px;font-size:12px;letter-spacing:.08em;cursor:pointer;transition:background .2s,border-color .2s}
+#loader .intro-skip:hover{background:#ffffff12;border-color:#c5d5e077}#loader .intro-skip:focus-visible{outline:2px solid #fff;outline-offset:5px}
+#loader .intro-scene{width:100%;text-align:center;position:relative;padding:40px 3vw;transform-style:preserve-3d}
+#loader .intro-overline{font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:#a9b8c7;margin:0 0 32px;animation:introCaption .9s .15s both}
+#loader .intro-word{position:relative;display:flex;justify-content:center;gap:.014em;margin:0;font-family:Arial,Helvetica,sans-serif;font-weight:800;font-size:clamp(74px,19vw,270px);line-height:1.1;letter-spacing:-.065em;padding-right:.065em;filter:drop-shadow(0 20px 13px #000b);user-select:none}
+#loader .intro-word span{display:inline-block;color:#c5cbd0;background:linear-gradient(167deg,#f0f4f8 0%,#9facb7 22%,#dce5eb 33%,#697683 47%,#e5edf2 50%,#a2b3c1 54%,#4a5662 70%,#c4cdd5 88%,#74828d 100%);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent;-webkit-text-stroke:.6px #d8e3ee42;animation:introLetter 1.7s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i)*.105s + .15s);transform-origin:50% 90%}
+#loader .intro-glint{position:absolute;top:57%;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,#e5f6ff80,transparent);box-shadow:0 0 35px 3px #bfd6f12b;opacity:0;animation:introGlint 2.6s .4s both;pointer-events:none}
+#loader .intro-tagline{font-family:Georgia,'Times New Roman',serif;font-size:clamp(20px,2.4vw,32px);font-weight:400;font-style:italic;line-height:1.5;color:#bdc8d2;letter-spacing:-.025em;margin:25px 15px 0;animation:introCaption 1.2s 1.05s both}
+#loader .intro-bottom{bottom:max(32px,env(safe-area-inset-bottom));align-items:end;text-transform:none;letter-spacing:.02em}
+#loader .intro-note{max-width:260px;margin:0;font-size:13px;color:#8b9aab;line-height:1.6}
+#loader .intro-track{width:clamp(130px,20vw,280px);height:1px;background:#9caec82e;margin-top:14px;overflow:hidden}
+#loader .intro-track span{display:block;width:100%;height:100%;background:linear-gradient(90deg,#63798e,#e8eef5);transform-origin:left;animation:introTrack 3.5s cubic-bezier(.2,.6,.4,1) both}
+#loader .intro-entering{color:#c2ccd6;font-size:12px;letter-spacing:.1em;text-align:right}
+#loader.hide{animation:none;opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.035);filter:blur(5px);transition:opacity .75s ease,transform .95s cubic-bezier(.22,1,.36,1),filter .75s ease,visibility .8s}
+@keyframes introLetter{from{opacity:0;transform:translateY(36px) rotateX(28deg);filter:blur(9px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes introCaption{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes introLight{from{opacity:0;transform:translateX(-12%) rotate(-9deg)}to{opacity:1;transform:translateX(0) rotate(-9deg)}}
+@keyframes introGlint{0%{opacity:0;transform:scaleX(.2) translateY(24px)}45%{opacity:.8}100%{opacity:0;transform:scaleX(1) translateY(-48px)}}
+@keyframes introTrack{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes introFailsafe{to{visibility:hidden;pointer-events:none;opacity:0}}
+@media(max-width:600px){#loader .intro-top,#loader .intro-bottom{left:7vw;right:7vw}#loader .intro-overline{font-size:10px;letter-spacing:.3em;margin-bottom:28px}#loader .intro-note{max-width:155px;font-size:12px}#loader .intro-edition{font-size:14px}#loader .intro-tagline{margin-top:22px}#loader .intro-bottom{gap:25px}#loader .intro-word{font-size:20vw}#loader .intro-entering{font-size:10px}}
+@media(prefers-reduced-motion:reduce){#loader *,#loader::before{animation:none!important}#loader .intro-glint{display:none}#loader.hide{transform:none;filter:none;transition:opacity .15s,visibility .15s}#loader .intro-track span{transform:none}}
+html.reduce-motion #loader *,html.reduce-motion #loader::before{animation:none!important}
+</style><noscript><style>#loader{display:none!important}</style></noscript><style>
+
 
 /* ======================================================
    NAV
@@ -909,10 +932,10 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ini
 <div class="noise" aria-hidden="true"></div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<div id="loader" role="status" aria-live="polite">
-  <div class="mark">SAHAY</div>
-  <div class="bar"></div>
-  <span class="visually-hidden">Loading</span>
+<div id="loader" role="dialog" aria-modal="true" aria-label="Welcome to SAHAY">
+  <div class="intro-top"><span class="intro-edition">A little clarity. A new beginning.</span><button class="intro-skip" id="intro-skip" type="button">Skip intro ↗</button></div>
+  <div class="intro-scene"><p class="intro-overline">Your next chapter begins here</p><div class="intro-word" aria-label="SAHAY"><span style="--i:0" aria-hidden="true">S</span><span style="--i:1" aria-hidden="true">A</span><span style="--i:2" aria-hidden="true">H</span><span style="--i:3" aria-hidden="true">A</span><span style="--i:4" aria-hidden="true">Y</span></div><div class="intro-glint" aria-hidden="true"></div><p class="intro-tagline">Possibility, brought closer.</p></div>
+  <div class="intro-bottom"><p class="intro-note">From India.<br>For the journeys ahead.</p><div><div class="intro-entering" role="status">Opening your world</div><div class="intro-track" aria-hidden="true"><span></span></div></div></div>
 </div>
 
 <!-- NAV -->
@@ -2474,12 +2497,8 @@ var SAHAY_I18N = {
   /* ------------------------------------------------------------------
      LOADER
      ------------------------------------------------------------------ */
-  window.addEventListener('load', function(){
-    var loader = document.getElementById('loader');
-    var rm = systemReduceMotion || state.reduceMotionUser;
-    setTimeout(function(){ loader.classList.add('hide'); }, rm ? 100 : 900);
-    setTimeout(runHeroIntro, rm ? 150 : 1000);
-  });
+  if(window.sahayIntroComplete) runHeroIntro();
+  else window.addEventListener('sahay:intro-complete', runHeroIntro, {once:true});
 
   /* ------------------------------------------------------------------
      SCROLL PROGRESS + NAV SCROLLED + ACTIVE SECTION
@@ -5417,6 +5436,21 @@ function action(a){pause();if(a==='left')lon+=15;if(a==='right')lon-=15;if(a==='
 canvas.onkeydown=e=>{const keys={ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down','+':'in','=':'in','-':'out',Home:'india'};if(keys[e.key]){e.preventDefault();action(keys[e.key])}};
 document.querySelectorAll('[data-earth]').forEach(b=>b.onclick=()=>action(b.dataset.earth));document.getElementById('earth-region').onchange=function(){pause();let p=this.value.split(',');lon=+p[0];lat=+p[1];draw();start()};spin.onclick=()=>{auto=!auto;status();start()};
 if('IntersectionObserver'in window)new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible){last=0;start()}},{threshold:0}).observe(canvas);document.addEventListener('visibilitychange',()=>{last=0;start()});reduce.addEventListener?.('change',()=>{if(reduce.matches){auto=false;status()}});status();start();
+})();
+</script><script>(function(){
+'use strict';
+var loader=document.getElementById('loader');if(!loader)return;
+var reduced=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var started=performance.now(),closed=false,timer,focusWas=document.activeElement;
+function finish(){if(closed)return;closed=true;clearTimeout(timer);loader.classList.add('hide');loader.setAttribute('aria-hidden','true');loader.inert=true;document.removeEventListener('keydown',onKey);loader.removeEventListener('pointermove',light);window.sahayIntroComplete=true;window.dispatchEvent(new Event('sahay:intro-complete'));if(loader.contains(document.activeElement)){var target=document.getElementById('hero')||document.getElementById('main');if(target){if(!target.hasAttribute('tabindex'))target.setAttribute('tabindex','-1');target.focus({preventScroll:true})}else if(focusWas&&focusWas.focus)focusWas.focus()}setTimeout(function(){loader.remove()},900)}
+function onKey(e){if(e.key==='Escape'){e.preventDefault();finish()}}
+function light(e){if(reduced)return;loader.style.setProperty('--intro-x',(35+e.clientX/Math.max(1,innerWidth)*30)+'%');loader.style.setProperty('--intro-y',(25+e.clientY/Math.max(1,innerHeight)*25)+'%')}
+document.getElementById('intro-skip').onclick=finish;document.addEventListener('keydown',onKey);loader.addEventListener('pointermove',light,{passive:true});
+// Presentation duration, not a simulated network loading percentage.
+var duration=reduced?250:3600;timer=setTimeout(finish,Math.max(0,duration-(performance.now()-started)));
+// Tab immediately enters the accessible skip control instead of the covered page.
+loader.addEventListener('keydown',function(e){if(e.key==='Tab'){e.preventDefault();document.getElementById('intro-skip').focus()}});
+document.getElementById('intro-skip').focus({preventScroll:true});
 })();
 </script></body>
 </html>
